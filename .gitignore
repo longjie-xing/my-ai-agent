@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+web_log.txt
+
+# Temp
+fetch_models.py
+fix_css*.py
+check_*.py
+find_brace.py
+check_js.py
+brace_check.txt
+check_result.txt
+rem.txt
+colors.txt

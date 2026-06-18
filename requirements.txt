@@ -1,0 +1,5 @@
+# 本项目需要的 Python 第三方库
+# 安装方法：在终端执行 pip install -r requirements.txt
+
+openai>=1.0.0          # 调用讯飞星火 API（它是 OpenAI 兼容格式）
+python-dotenv>=1.0.0   # 读取 .env 文件里的配置
