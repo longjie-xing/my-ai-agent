@@ -1,83 +1,71 @@
 # 🤖 个人知识助手 AI Agent
 
-一个适合新手的 Python AI 项目，基于 **讯飞星火大模型 API**。
+一个功能全面的 AI 对话助手 Web 应用，基于 **Agnes AI API**（OpenAI 兼容格式），支持文字对话、图片生成、视频生成、知识库问答。
 
-## 你能学到什么？
+## ✨ 功能一览
 
-| 知识点 | 说人话版 |
-|--------|---------|
-| 调用 AI API | 让程序和 AI "打电话" |
-| Prompt 工程 | 怎么写指令让 AI 听你的 |
-| RAG 入门 | 让 AI 基于你自己的资料回答问题 |
-| 环境变量管理 | 把密码藏好，不泄露 |
-| 对话历史管理 | 让 AI 记住上下文 |
+| 功能 | 说明 |
+|------|------|
+| 💬 **AI 对话** | 流式输出，逐字显示回复，支持 Markdown 渲染 |
+| 🎨 **图片生成** | 输入描述，调用 `agnes-image-2.1-flash` 生成图片 |
+| 🎬 **视频生成** | 异步任务，自动轮询完成状态，完成后嵌入播放器 |
+| 📚 **知识库问答** | 基于 `knowledge/` 目录文件内容进行 RAG 问答 |
+| 🔀 **多模型切换** | 可在 `agnes-2.0-flash` / `agnes-1.5-flash` 间切换 |
+| 🌙 **深色模式** | 一键切换，偏好自动保存 |
+| 📁 **对话管理** | 多对话、重命名、置顶、搜索、按时间分组 |
+| 📎 **文件上传** | 图片自动缩略图 + AI 理解，文本文件自动读取内容 |
+| ✏️ **编辑消息** | 双击自己发的消息可编辑后重新发送 |
+| 🛑 **停止生成** | AI 回复时可随时中断 |
+| 📋 **代码复制** | 代码块右上角一键复制 |
+| 📤 **对话导出** | 导出为 JSON 或 TXT 格式 |
+| 📱 **移动端适配** | 窄屏侧栏可滑出，响应式布局 |
 
-## 准备工作
+## 🚀 快速开始
 
-1. **安装 Python 3.12+** ✅ 你已装好
-2. **安装 VS Code**（如果没装，去 code.visualstudio.com 下载）
-3. **VS Code 装 Python 插件**（左侧扩展 → 搜 Python → 安装）
-4. **注册讯飞星火账号** → https://console.xfyun.cn/app/myapp
-5. **拿到 APIPassword**（在控制台 → 应用 → 服务接口认证信息）
+### 1. 安装依赖
 
-## 快速开始
-
-### 第 1 步：在 VS Code 中打开项目
-
-```bash
-# 打开 VS Code，按 Ctrl+K Ctrl+O
-# 选择文件夹：D:\Program Files\atomcode\my-ai-agent
-```
-
-或者打开终端（cmd）运行：
-```bash
-code "D:\Program Files\atomcode\my-ai-agent"
-```
-
-### 第 2 步：配置 API Key
-
-```bash
-# 复制模板文件
-copy .env.example .env
-```
-
-然后打开 `.env` 文件，把 `你的APIPassword在这里` 改成你在讯飞拿到的密码。
-
-### 第 3 步：安装依赖
-
-在 VS Code 的终端（Ctrl+`）里运行：
 ```bash
 pip install -r requirements.txt
 ```
 
-### 第 4 步：运行！
+### 2. 配置 API Key
 
 ```bash
-python agent.py
+copy .env.example .env
 ```
 
-## 使用示例
+打开 `.env`，将 `YOUR_API_KEY` 替换为你的 Key（从 [platform.agnes-ai.com](https://platform.agnes-ai.com/settings/apiKeys) 获取）。
 
-### 💬 普通聊天
-```
-👤 你：你好，你是谁？
-🤖 助手：你好！我是你的个人知识助手，你可以问我任何问题...
-```
+### 3. 运行
 
-### 📄 基于本地知识问答
-先创建一个知识文件（比如 `我的笔记.txt`），然后：
-```
-👤 你：/load 我的笔记.txt
-📚 知识库已更新！
-
-👤 你：/ask 我的笔记里提到了哪些技术？
-🤖 助手：让我看看资料...根据你的笔记，提到了 Python、JavaScript...
+```bash
+python web_app.py
 ```
 
-## 进阶玩法（自己尝试！）
+浏览器打开 **http://localhost:5000**
 
-- [ ] 支持多个知识文件
-- [ ] 支持 PDF/Word 文档
-- [ ] 保存聊天记录到文件
-- [ ] 用 Flask 做个网页界面
-- [ ] 接入更多功能（天气查询、待办事项...）
+## 📁 项目结构
+
+```
+my-ai-agent/
+├── web_app.py              # Flask 后端
+├── templates/
+│   └── chat.html           # 前端界面（单页）
+├── knowledge/              # 知识库目录
+│   ├── AI概念入门.md
+│   ├── python入门.md
+│   └── 我的笔记.txt
+├── .env                    # API 配置（不提交）
+├── .env.example            # 配置模板
+├── requirements.txt        # 依赖
+├── start.bat               # Windows 启动脚本
+└── agent.py                # 命令行版（旧）
+```
+
+## 🧠 技术栈
+
+- **后端**: Python Flask
+- **前端**: 原生 HTML + CSS + JavaScript
+- **AI API**: Agnes AI（OpenAI 兼容格式）
+- **Markdown**: marked.js
+- **模型**: agnes-2.0-flash / agnes-1.5-flash / agnes-image-2.1-flash / agnes-video-v2.0
